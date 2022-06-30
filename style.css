@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+
+/* Variables */
+:root {
+  --white: hsla(0, 0%, 100%, 1);
+  --lightGreen: hsla(136, 44%, 82%, 1);
+  --brightBlue: hsla(180, 98%, 39%, 1);
+  --lightBg: hsla(181, 70%, 25%, 1);
+  --darkFade: hsla(180, 8%, 59%, 1);
+  --darkBg: hsla(180, 92%, 5%, 0.5);
+  --dark: hsla(180, 92%, 5%, 0.85);
+  --border: hsla(180, 9%, 91%, 1);
+  --grey: hsla(180, 8%, 81%, 1);
+  --lightGrey: hsla(0, 0%, 94%, 1);
+  --linear-transition: transform 300ms linear;
+  --ease-transition: all 300ms ease;
+  --ease-transition-transform: transform 300ms ease;
+  --border-radius: 0.4rem;
+}
+
+/* Global styling */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  background-color: var(--lightGrey);
+  background-attachment: fixed;
+  background-position: bottom center;
+  background-size: 100vw;
+  background-image: url('../assets/wave.svg');
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 100vw;
+  margin: 0;
+  font-family: 'Inter';
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
+  font-weight: 500;
+}
+
+
+a {
+  display: block;
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+  font-size: 1rem;
+}
+
+button:focus,
+button:active {
+  border: 0;
+  box-shadow: none;
+}
+
+@media (hover: hover) {
+  button {
+    cursor: pointer;
+  }
+}
+
+/* Component styling */
+button.btn-solid {
+  width: fit-content;
+  padding: 0.53125rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--brightBlue);
+  color: var(--white);
+  font-weight: 500;
+  transition: all 300ms ease-in-out;
+}
+
+button.btn-solid:hover {
+  background-color: var(--darkBg);
+}
+
+nav.slide-in-nav {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+}
+
+.nav-bar,
+.nav-slide-panel {
+  background-color: var(--white);
+}
+
+.nav-bar {
+  width: 100%;
+  min-height: 5rem;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.nav-control {
+  position: relative;
+  width: 1.666875rem;
+  height: 1.25rem;
+}
+
+button.nav-control > span {
+  position: absolute;
+  display: block;
+  width: 1.666875rem;
+  height: 2px;
+  background-color: var(--darkBg);
+  transition: var(--ease-transition-transform);
+  border-radius: 999px;
+}
+
+button.nav-control > span:first-child {
+  top: 0;
+}
+
+button.nav-control > span:nth-child(2) {
+  top: 50%;
+  transition: var(--ease-transition);
+  transform: translateY(-50%);
+}
+
+button.nav-control > span:last-child {
+  bottom: 0;
+}
+
+button.nav-control.active > span:first-child,
+button.nav-control.active > span:last-child {
+  top: 50%;
+}
+
+button.nav-control.active > span:first-child {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+button.nav-control.active > span:nth-child(2) {
+  opacity: 0;
+}
+
+button.nav-control.active > span:last-child {
+  bottom: unset;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.nav-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 5rem;
+  background-color: var(--brightBlue);
+}
+
+.nav-slide-panel {
+  position: absolute;
+  right: 0;
+  top: 4.5rem;
+  width: 100%;
+  height: calc(100vh - 4.5rem);
+  transform: translateY(100%);
+  transition: var(--linear-transition);
+  will-change: transform;
+  padding: 2.5rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: scroll;
+}
+
+.nav-slide-panel.show {
+  transform: translateY(0);
+  transition: var(--linear-transition);
+}
+
+.nav-items-container,
+.nav-actions-container,
+.nav-social-container {
+  width: 100%;
+}
+
+.nav-items-container {
+  margin-bottom: 2.5rem;
+}
+
+a.nav-item {
+  display: block;
+  position: relative;
+  width: fit-content;
+  margin-bottom: 1.25rem;
+  padding-right: 2.25rem;
+  font-size: 1.125rem;
+  color: var(--darkBg);
+  transition: all 300ms ease-in-out;
+}
+
+a.nav-item::after {
+  content: "";
+  display: block;
+  width: 1.375rem;
+  height: 1.375rem;
+  background-size: 1.375rem 1.375rem;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url("arrow.svg");
+}
+
+a.nav-item.active::after {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+a.nav-item > svg.arrow-icon {
+  width: 1.125rem;
+  color: var(--brightBlue);
+  margin-left: 0.5rem;
+}
+
+a.nav-item.active {
+  color: var(--brightBlue);
+}
+
+a.nav-item:last-child {
+  margin-bottom: 0;
+}
+
+a.nav-item:hover {
+  transform: scale(1.06);
+}
+
+.nav-actions-container {
+  padding-top: 1.875rem;
+  border-top: 1px solid var(--border);
+}
+
+a.nav-action {
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+a.nav-action:last-child {
+  margin-bottom: 0;
+}
+
+a.nav-action > button.btn-solid {
+  width: 100%;
+  margin-top: 1.875rem;
+}
+
+a.nav-action > span {
+  position: relative;
+  display: block;
+  padding-left: 2.125rem;
+  color: var(--darkFade);
+  transition: color 300ms ease;
+}
+
+a.nav-action > span::before {
+  content: "";
+  display: block;
+  width: 1.375rem;
+  height: 1.375rem;
+  background-size: 1.375rem 1.375rem;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 0;
+}
+
+a.nav-action > span.telephone::before {
+  background-image: url("phone.svg");
+}
+
+a.nav-action > span.email::before {
+  background-image: url("mail.svg");
+}
+
+a.nav-action > span:hover {
+  color: var(--darkBg);
+}
+
+.nav-social-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+a.nav-social-item,
+a.nav-social-item > svg {
+  width: 2.5rem;
+}
+
+@media only screen and (min-width: 480px) {
+  .nav-slide-panel {
+    max-width: 20rem;
+    border-radius: 0.4rem 0 0 0;
+    transform: translateX(100%);
+    height: calc(100vh - 6.25rem);
+    top: 6.25rem;
+  }
+
+  .nav-slide-panel.show {
+    transform: translateX(0);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .nav-items-container {
+    margin-bottom: 3.75rem;
+  }
+
+  .nav-slide-panel {
+    padding: 2.75rem 2rem;
+  }
+
+  a.nav-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-actions-container {
+    padding-top: 2.5rem;
+  }
+
+  a.nav-action > button.btn-solid {
+    margin-top: 2.5rem;
+  }
+}
